@@ -21,6 +21,8 @@ func connect(c echo.Context) error {
 
 func main() {
 	e := echo.New()
+	e.GET("/users", controller.GetUsers)
+	e.GET("/users/:id", controller.GetUser)
 	e.POST("/users", controller.CreateUser)
 	e.Logger.Fatal(e.Start(":8080"))
 }
