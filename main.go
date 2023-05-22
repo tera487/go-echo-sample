@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-echo-sample/controller"
 	"go-echo-sample/model"
 	"net/http"
 
@@ -20,6 +21,6 @@ func connect(c echo.Context) error {
 
 func main() {
 	e := echo.New()
-	e.GET("/", connect)
+	e.POST("/users", controller.CreateUser)
 	e.Logger.Fatal(e.Start(":8080"))
 }
