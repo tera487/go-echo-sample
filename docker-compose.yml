@@ -9,6 +9,7 @@ services:
     tty: true
     ports:
       - 8080:8080
+      - 2345:2345
     depends_on:
       - db
     volumes:
