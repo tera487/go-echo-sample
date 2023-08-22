@@ -7,7 +7,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// CreateUser は
 func CreateUser(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
@@ -17,14 +16,12 @@ func CreateUser(c echo.Context) error {
 	return c.JSON(http.StatusCreated, user)
 }
 
-// GetUsers は
 func GetUsers(c echo.Context) error {
 	users := []model.User{}
 	model.DB.Find(&users)
 	return c.JSON(http.StatusOK, users)
 }
 
-// GetUser は
 func GetUser(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
@@ -34,7 +31,6 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-// UpdateUser は
 func UpdateUser(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
@@ -44,7 +40,6 @@ func UpdateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-// DeleteUser は
 func DeleteUser(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
