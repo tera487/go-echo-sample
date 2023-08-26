@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"fmt"
 	"go-echo-sample/model"
 	"net/http"
@@ -85,4 +86,20 @@ func Login(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]string{
 		"token": t,
 	})
+}
+
+func JwtParser(token *jwt.Token) (*jwt.MapClaims, error) {
+	token, _ = jwt.Parse(token.Raw, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+
+		return Config, nil
+	})
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok && token.Valid {
+		return nil, errors.New("failed to cast claims as jwt.MapClaims")
+	}
+	return &claims, nil
 }
